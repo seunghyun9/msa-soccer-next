@@ -1,10 +1,12 @@
-import axios from "axios";
+
 import style from "board/style/board-form.module.css"
 import React,{useState} from 'react' 
+import { useDispatch } from "react-redux";
+import { addTitle } from '../../redux/reducers/board.reducer'
 
 export default function TeamForm(){
-    const [inputs, setInputs] = useState({}) /*아래 setInputs과 형식을 맞춰줌 */
-
+    const [value, setValue] = useState('') /*아래 setInputs과 형식을 맞춰줌 */
+    const dispatch = useDispatch()
     const handleChange = e => { /*e는 소비자가 행동하는 액션(이벤트) 아규먼트가 상수처리가 됨*/
         e.preventDefault() /* 원래값(디폴트)값으로 돌아가는걸 막아줌 */
         const {value, name} = e.target; /* argument란 함수가 호출될 때 함수로 값을 전달해주는 값을 말합니다 
@@ -12,30 +14,40 @@ export default function TeamForm(){
         setInputs({...inputs, [name]: value}) /*JSON >"name": "식빵" , [name]은 변하지 않는 값(상수)이고 value 는 변하는 값(변수)  상태를 저장해줌*/
     }
     
-    const handleSubmit = e => {
-        e.preventDefault()
-        alert(`등록할 게시글 : ${ JSON.stringify(inputs) }`)
-        axios.post('http://localhost:5000/api/board/write', inputs)
-        .then(res => {
-            alert(`결과: ${res.data.result}`)
-        })
-        .catch(err => alert(err))
-        /*axios는 출발지 app은 도착지 /가는것은 req(담겨져있음) 와서 작동하는 것은 res 
-        req는 헤드와 바디로 이루어져있다. 데이터는 보통 바디에 찍혀져있음. req.body , req은 아규먼트*/
-    }
+    // const handleSubmit = e => {
+    //     e.preventDefault()
+    //     alert(`등록할 게시글 : ${ JSON.stringify(inputs) }`)
+    //     axios.post('http://localhost:5000/api/board/write', inputs)
+    //     .then(res => {
+    //         alert(`결과: ${res.data.result}`)
+    //     })
+    //     .catch(err => alert(err))
+    //     /*axios는 출발지 app은 도착지 /가는것은 req(담겨져있음) 와서 작동하는 것은 res 
+    //     req는 헤드와 바디로 이루어져있다. 데이터는 보통 바디에 찍혀져있음. req.body , req은 아규먼트*/
+
+    // }
+    
     return (<>
-    <form action="" onSubmit={handleSubmit} >
+        <form onSubmit={ e => {
+        e.preventDefault()
+        alert('제목'+value)
+        if(value) dispatch(addTitle({title: value}))
+        }} >
         <h1>게시글 등록</h1>
         <div className={style.container}>
             <div className={style.row}>
                 <div className={style.col25}>
-                <label className={style.label} htmlFor="passengerId">게시글 작성자 ID</label>
+                <label className={style.label} htmlFor="passengerId">글 제목</label>
                 </div>
                 <div className={style.col75}>
-                <input type="text" onChange={handleChange} className={style.inputText}
-                id="passengerId" name="passengerId" placeholder="게시글 작성자 ID 입력"/>
+                <input type="text" onChange={e => {
+              e.preventDefault()
+                setValue(e.target.value)
+          }} className={style.inputText}
+                id="title" name="title" placeholder="게시글 제목 입력"/>
                 </div>
             </div>
+            {/** 
             <div className={style.row}>
                 <div className={style.col25}>
                 <label htmlFor="name">게시글 작성자 이름</label>
@@ -67,6 +79,7 @@ export default function TeamForm(){
                 </div>
             </div>
             <br/>
+            */}
             <div className={style.row}>
                 <input type="submit" className={style.inputSubmit} value="Submit"/>
             </div>
