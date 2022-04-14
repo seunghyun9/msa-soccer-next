@@ -5,7 +5,8 @@ const headers = {
     Authorization: "JWT fefege...",
 }
 
-const addTask = data => axios.post(`${SERVER}/api/todo/add-Task`, data.task,{headers})
+const addTask = data => 
+axios.post(`${SERVER}/api/todo/add-Task`, data.task,{headers})
 
 export default {
     addTask

@@ -2,9 +2,9 @@
 import style from "board/style/board-form.module.css"
 import React,{useState} from 'react' 
 import { useDispatch } from "react-redux";
-import { addTitle } from '../../redux/reducers/board.reducer'
+import { addTitle } from '../../redux/reducers/boardReducer.ts'
 
-export default function TeamForm(){
+export default function Board(){
     const [value, setValue] = useState('') /*아래 setInputs과 형식을 맞춰줌 */
     const dispatch = useDispatch()
     const handleChange = e => { /*e는 소비자가 행동하는 액션(이벤트) 아규먼트가 상수처리가 됨*/
@@ -28,26 +28,23 @@ export default function TeamForm(){
     // }
     
     return (<>
-        <form onSubmit={ e => {
-        e.preventDefault()
-        alert('제목'+value)
-        if(value) dispatch(addTitle({title: value}))
-        }} >
         <h1>게시글 등록</h1>
         <div className={style.container}>
+            <form onSubmit={e => {
+                e.preventDefault()
+                
+                if(value) dispatch(addTitle(value))
+            }}>
             <div className={style.row}>
                 <div className={style.col25}>
                 <label className={style.label} htmlFor="passengerId">글 제목</label>
                 </div>
                 <div className={style.col75}>
-                <input type="text" onChange={e => {
-              e.preventDefault()
-                setValue(e.target.value)
-          }} className={style.inputText}
-                id="title" name="title" placeholder="게시글 제목 입력"/>
+                <input type="text" className={style.inputText} onChange={handleChange}
+                id="title" name="title" placeholder="글 제목 입력"/>
                 </div>
             </div>
-            {/** 
+            
             <div className={style.row}>
                 <div className={style.col25}>
                 <label htmlFor="name">게시글 작성자 이름</label>
@@ -79,12 +76,12 @@ export default function TeamForm(){
                 </div>
             </div>
             <br/>
-            */}
             <div className={style.row}>
                 <input type="submit" className={style.inputSubmit} value="Submit"/>
             </div>
-            </div>
             </form>
+            </div>
+            
             
     </>)
 }

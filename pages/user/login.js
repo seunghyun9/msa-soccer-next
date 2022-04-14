@@ -18,7 +18,7 @@ import _ from "@lodash";
 // import "features/common/font/font.scss";
 // import "features/common/style/image.scss";
 // import "features/user/style/UserLayout.scss";
-import { loginRequest } from "../../redux/reducers/user.reducer";
+import { loginRequest } from "../../redux/reducers/userReducer.ts";
 import Image from "next/image";
 const Root = styled("div")(({ theme }) => ({
   "& .Login3-leftSection": {},
@@ -46,7 +46,7 @@ const defaultValues = {
   name: "",
   telephone: "",
 };
-export default function Login3Page() {
+export default function Login() {
   const dispatch = useDispatch();
   const { control, formState, handleSubmit, reset } = useForm({
     mode: "onChange",
@@ -60,7 +60,7 @@ export default function Login3Page() {
   return (
     <>
       <Root
-        style={{ width: "60vh", marginLeft: " 434px", marginTop: "-100px;" }}
+        style={{ width: "60vh"}}
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.6 }}
