@@ -1,9 +1,0 @@
-.nav{
-    display: flex;
-    justify-content: space-between;
-    background-color: rgb(13, 177, 189);
-}
-.li{
-    display: inline;
-    margin-left: 40px;
-}

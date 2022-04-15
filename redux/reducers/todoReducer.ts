@@ -1,16 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = []
-export const todoSlice = createSlice({
+export interface TodoType{ 
+    userid: string;
+    task: string;
+    completed: string; //value is T or F
+}
+export interface TdoState{
+    loading: boolean;
+    data: TodoType[];
+    error: any;
+}
+const initialState: TdoState = {
+    loading: false,
+    data: [],
+    error: null,
+}
+const todoSlice = createSlice({ // 객체임 , Join---이 기능임. 원래{}는 키값을 가진 스트링이지만, 여기서는 액션으로 활용한다.
     name: 'todos',
     initialState,
     reducers: {
-        addTask: (state, action) => {
-            alert('리듀서 내부로 들어온 할일은 ? '+action.payload.task)
-            const todo = {id: new Date(), task: action.payload.task, completed: false}
-            state.push(todo)
+        joinRequest(state: TdoState, payload)
+        {  alert('진행2: 리듀서내부')
+            state.loading = true},
+
+        joinSuccess(state: TdoState, {payload})
+        { state.data = [...state.data, payload]
+          state.loading = false;
+        
+        },
+        joinFailure(state: TdoState, {payload})
+        { state.data = payload; 
+          state.loading = false;
         }
     }
 })
-export const { addTask } = todoSlice.actions
-export default todoSlice.reducer
+const { reducer, actions } = todoSlice
+export const todoActions = actions
+export default reducer
