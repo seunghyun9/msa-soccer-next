@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 export interface TodoType{ 
-    userid: string;
-    task: string;
-    completed: string; //value is T or F
+    userid: string,
+    task: string,
+    completed: string; // value is T , F
 }
 export interface TdoState{
     loading: boolean;
@@ -19,16 +19,16 @@ const todoSlice = createSlice({ // 객체임 , Join---이 기능임. 원래{}는
     name: 'todos',
     initialState,
     reducers: {
-        joinRequest(state: TdoState, payload)
+        taskRequest(state: TdoState, payload)
         {  alert('진행2: 리듀서내부')
             state.loading = true},
 
-        joinSuccess(state: TdoState, {payload})
+        taskSuccess(state: TdoState, {payload})
         { state.data = [...state.data, payload]
           state.loading = false;
         
         },
-        joinFailure(state: TdoState, {payload})
+        taskFailure(state: TdoState, {payload})
         { state.data = payload; 
           state.loading = false;
         }
