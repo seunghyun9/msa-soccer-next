@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import tableStyles from '../common/styles/table.module.css'
-import { todoActions } from '../../redux/reducers/todoReducer.ts'
+import { todoActions } from '../../redux/reducers/todoReducer.ts' //구조분해로 할당해 임포트
 export default function AddTodo() {
-    const [todo, setTodo] = useState({userid: '', task: '', completed: ''})
+    const [todo, setTodo] = useState({userid: '', task: ''})
     const dispatch = useDispatch()
     const handleChange = e =>{
       e.preventDefault()
@@ -15,7 +15,7 @@ export default function AddTodo() {
           e.preventDefault()
           alert('진행1 : 일정등록 클릭')
           dispatch(todoActions.taskRequest(todo))
-          setTodo({userid: '', task: '', completed: ''})
+          setTodo({userid: '', task: ''})
       }}>
         <table className={tableStyles.table}>
         <thead>

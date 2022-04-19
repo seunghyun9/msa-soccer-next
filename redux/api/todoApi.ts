@@ -7,11 +7,10 @@ const headers = {
 export interface TodoType{ 
     userid: string,
     task: string,
-    completed: string
 
 }
 export const postTodo = async (payload: 
-    {userid: string, task: string, completed: string}) => {
+    {userid: string, task: string}) => {
          try{
             const response : AxiosResponse<unknown, TodoType[]> = 
             await axios.post(`${SERVER}/api/todo/todo-write`,payload, {headers})
