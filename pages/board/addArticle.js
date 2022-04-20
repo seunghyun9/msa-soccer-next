@@ -66,7 +66,7 @@ export default function Board(){
                     <label htmlFor="team">주제</label>
                 </td>
                 <td >
-                    <select id="teamId" name="teamId" onChange={handleChange}>
+                    <select id="teamId"   e="teamId" onChange={handleChange}>
                         <option value="">주제 선택</option>
                         <option value="K09">영화</option>
                         <option value="K02">도서</option>
