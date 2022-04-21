@@ -39,7 +39,21 @@ const userSlice = createSlice({ // 객체임 , Join---이 기능임. 원래{}는
         joinFailure(state: UserState, {payload})
         { state.data = payload; 
           state.loading = false;
+        },
+        loginRequest(state: UserState, payload)
+        {  alert('진행2: 로그인 리듀서 내부')
+            state.loading = true},
+
+        loginSuccess(state: UserState, {payload})
+        { state.data = [...state.data, payload]
+          state.loading = false;
+        
+        },
+        loginFailure(state: UserState, {payload})
+        { state.data = payload; 
+          state.loading = false;
         }
+        
     }
 })
 const { reducer, actions } = userSlice
